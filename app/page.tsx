@@ -286,32 +286,35 @@ export default function SprintDashboard() {
             <div className="card p-5 sm:p-6 w-full max-w-sm bg-white mx-4" onClick={e => e.stopPropagation()}>
               <h2 className="text-base sm:text-lg font-bold mb-5 sm:mb-6">Sprint Settings</h2>
               <div className="space-y-4">
-                <div>
+                <div className="w-full">
                   <label className="block text-xs text-ink/60 mb-2 font-medium">Sprint Name</label>
                   <input
                     type="text"
                     value={data.sprintConfig.name}
                     onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, name: e.target.value } })}
-                    className="input-field text-sm sm:text-base w-full"
+                    className="input-field text-sm sm:text-base w-full box-border"
+                    style={{ width: '100%', maxWidth: '100%' }}
                   />
                 </div>
-                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
-                  <div className="w-full">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 w-full">
+                  <div className="w-full sm:w-auto">
                     <label className="block text-xs text-ink/60 mb-2 font-medium">Start Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.startDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, startDate: e.target.value } })}
-                      className="input-field text-sm sm:text-base w-full"
+                      className="input-field text-sm sm:text-base w-full box-border"
+                      style={{ width: '100%', maxWidth: '100%' }}
                     />
                   </div>
-                  <div className="w-full">
+                  <div className="w-full sm:w-auto">
                     <label className="block text-xs text-ink/60 mb-2 font-medium">End Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.endDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, endDate: e.target.value } })}
-                      className="input-field text-sm sm:text-base w-full"
+                      className="input-field text-sm sm:text-base w-full box-border"
+                      style={{ width: '100%', maxWidth: '100%' }}
                     />
                   </div>
                 </div>
