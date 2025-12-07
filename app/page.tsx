@@ -286,7 +286,7 @@ export default function SprintDashboard() {
             <div className="card p-5 sm:p-6 w-full max-w-sm bg-white mx-4" onClick={e => e.stopPropagation()}>
               <h2 className="text-base sm:text-lg font-bold mb-5 sm:mb-6">Sprint Settings</h2>
               <div className="space-y-4">
-                <div className="w-full">
+                <div>
                   <label className="block text-xs text-ink/60 mb-2 font-medium">Sprint Name</label>
                   <input
                     type="text"
@@ -295,7 +295,7 @@ export default function SprintDashboard() {
                     className="input-field text-sm sm:text-base w-full"
                   />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4">
                   <div className="w-full">
                     <label className="block text-xs text-ink/60 mb-2 font-medium">Start Date</label>
                     <input
