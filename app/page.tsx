@@ -283,39 +283,39 @@ export default function SprintDashboard() {
         {/* Settings Modal */}
         {showSettings && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowSettings(false)}>
-            <div className="card p-4 sm:p-6 w-full max-w-sm bg-white" onClick={e => e.stopPropagation()}>
-              <h2 className="text-lg font-bold mb-4">Sprint Settings</h2>
-              <div className="space-y-4">
+            <div className="card p-5 sm:p-6 w-full max-w-sm bg-white mx-4" onClick={e => e.stopPropagation()}>
+              <h2 className="text-base sm:text-lg font-bold mb-4 sm:mb-5">Sprint Settings</h2>
+              <div className="space-y-3 sm:space-y-4">
                 <div>
-                  <label className="block text-xs text-ink/60 mb-1">Sprint Name</label>
+                  <label className="block text-xs text-ink/60 mb-1.5 sm:mb-2">Sprint Name</label>
                   <input
                     type="text"
                     value={data.sprintConfig.name}
                     onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, name: e.target.value } })}
-                    className="input-field"
+                    className="input-field text-sm sm:text-base"
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3">
                   <div>
-                    <label className="block text-xs text-ink/60 mb-1">Start Date</label>
+                    <label className="block text-xs text-ink/60 mb-1.5 sm:mb-2">Start Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.startDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, startDate: e.target.value } })}
-                      className="input-field"
+                      className="input-field text-sm sm:text-base"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs text-ink/60 mb-1">End Date</label>
+                    <label className="block text-xs text-ink/60 mb-1.5 sm:mb-2">End Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.endDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, endDate: e.target.value } })}
-                      className="input-field"
+                      className="input-field text-sm sm:text-base"
                     />
                   </div>
                 </div>
-                <button onClick={() => setShowSettings(false)} className="btn-primary w-full">Save & Close</button>
+                <button onClick={() => setShowSettings(false)} className="btn-primary w-full mt-4 sm:mt-5 py-2.5 sm:py-3 text-sm sm:text-base">Save & Close</button>
               </div>
             </div>
           </div>
