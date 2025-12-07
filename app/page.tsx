@@ -257,23 +257,23 @@ export default function SprintDashboard() {
   };
 
   return (
-    <div className="h-screen bg-sage-50 p-4 overflow-hidden">
-      <div className="max-w-6xl mx-auto h-full flex flex-col gap-4">
+    <div className="min-h-screen bg-sage-50 p-2 sm:p-4 overflow-y-auto">
+      <div className="max-w-6xl mx-auto h-full flex flex-col gap-2 sm:gap-4">
         
         {/* Header */}
-        <header className="flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-4">
+        <header className="flex flex-col sm:flex-row items-start sm:items-center justify-between flex-shrink-0 gap-2 sm:gap-0">
+          <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
             <div>
-              <h1 className="text-2xl font-bold text-ink">{data.sprintConfig.name}</h1>
+              <h1 className="text-xl sm:text-2xl font-bold text-ink">{data.sprintConfig.name}</h1>
               <p className="text-ink/50 text-xs">The Life of Piet</p>
             </div>
-            <button onClick={() => setShowSettings(true)} className="text-ink/40 hover:text-ink transition-colors text-sm">
+            <button onClick={() => setShowSettings(true)} className="text-ink/40 hover:text-ink transition-colors text-xs sm:text-sm ml-auto sm:ml-0">
               ⚙ Settings
             </button>
           </div>
-          <div className="flex gap-2">
-            <button onClick={exportData} className="btn-secondary text-xs py-1.5 px-3">Export</button>
-            <label className="btn-secondary text-xs py-1.5 px-3 cursor-pointer">
+          <div className="flex gap-2 w-full sm:w-auto">
+            <button onClick={exportData} className="btn-secondary text-xs py-1.5 px-3 flex-1 sm:flex-none">Export</button>
+            <label className="btn-secondary text-xs py-1.5 px-3 cursor-pointer flex-1 sm:flex-none">
               Import
               <input type="file" accept=".json" onChange={importData} className="hidden" />
             </label>
@@ -282,8 +282,8 @@ export default function SprintDashboard() {
 
         {/* Settings Modal */}
         {showSettings && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowSettings(false)}>
-            <div className="card p-6 w-96 bg-white" onClick={e => e.stopPropagation()}>
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" onClick={() => setShowSettings(false)}>
+            <div className="card p-4 sm:p-6 w-full max-w-sm bg-white" onClick={e => e.stopPropagation()}>
               <h2 className="text-lg font-bold mb-4">Sprint Settings</h2>
               <div className="space-y-4">
                 <div>
@@ -322,60 +322,60 @@ export default function SprintDashboard() {
         )}
 
         {/* Main Grid - fits in viewport */}
-        <div className="flex-1 grid grid-cols-4 gap-4 min-h-0">
+        <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-2 sm:gap-4 min-h-0">
           
           {/* Left Column - Sprint Progress + Time */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2 sm:gap-4 md:col-span-1">
             {/* Sprint Progress */}
-            <div className="card p-4">
-              <div className="flex items-center justify-between mb-3">
+            <div className="card p-3 sm:p-4">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
                 <p className="text-xs text-ink/50 uppercase tracking-wide">Progress</p>
-                <p className="text-2xl font-bold">{daysRemaining}d</p>
+                <p className="text-xl sm:text-2xl font-bold">{daysRemaining}d</p>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="relative w-14 h-14 flex-shrink-0">
-                  <svg className="w-14 h-14 transform -rotate-90">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="relative w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0">
+                  <svg className="w-12 h-12 sm:w-14 sm:h-14 transform -rotate-90" viewBox="0 0 56 56">
                     <circle cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="4" fill="none" className="text-ink/10" />
                     <circle cx="28" cy="28" r="24" stroke="currentColor" strokeWidth="4" fill="none"
                       strokeDasharray={`${progressPercent * 1.51} 151`} strokeLinecap="round" className="text-ink" />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-xs font-bold">{progressPercent}%</span>
+                    <span className="text-[10px] sm:text-xs font-bold">{progressPercent}%</span>
                   </div>
                 </div>
                 <div className="text-xs text-ink/60">
                   <p>Day {daysElapsed} of {totalDays}</p>
-                  <p className="text-ink/40">{formatDate(data.sprintConfig.endDate)}</p>
+                  <p className="text-ink/40 text-[10px] sm:text-xs">{formatDate(data.sprintConfig.endDate)}</p>
                 </div>
               </div>
             </div>
 
             {/* Time Tracker */}
-            <div className="card p-4 flex-1">
+            <div className="card p-3 sm:p-4 flex-1">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs text-ink/50 uppercase tracking-wide">
                   {isToday ? "Today's Time" : "Time Logged"}
                 </p>
                 {timeSaved && <span className="text-xs text-emerald-600">✓ Saved</span>}
               </div>
-              <div className="flex gap-2 mb-3">
+              <div className="flex gap-2 mb-2 sm:mb-3">
                 <div className="flex-1">
                   <input
                     type="number" min="0" max="24" value={selectedHours}
                     onChange={(e) => setSelectedHours(parseInt(e.target.value) || 0)}
                     disabled={!isToday}
-                    className={`input-field text-center text-xl font-bold py-2 ${!isToday ? 'opacity-60 cursor-not-allowed' : ''}`}
+                    className={`input-field text-center text-lg sm:text-xl font-bold py-1.5 sm:py-2 ${!isToday ? 'opacity-60 cursor-not-allowed' : ''}`}
                   />
-                  <p className="text-xs text-ink/40 text-center mt-1">hrs</p>
+                  <p className="text-[10px] sm:text-xs text-ink/40 text-center mt-1">hrs</p>
                 </div>
                 <div className="flex-1">
                   <input
                     type="number" min="0" max="59" step="5" value={selectedMinutes}
                     onChange={(e) => setSelectedMinutes(parseInt(e.target.value) || 0)}
                     disabled={!isToday}
-                    className={`input-field text-center text-xl font-bold py-2 ${!isToday ? 'opacity-60 cursor-not-allowed' : ''}`}
+                    className={`input-field text-center text-lg sm:text-xl font-bold py-1.5 sm:py-2 ${!isToday ? 'opacity-60 cursor-not-allowed' : ''}`}
                   />
-                  <p className="text-xs text-ink/40 text-center mt-1">min</p>
+                  <p className="text-[10px] sm:text-xs text-ink/40 text-center mt-1">min</p>
                 </div>
               </div>
               {isToday && (
@@ -391,23 +391,23 @@ export default function SprintDashboard() {
           </div>
 
           {/* Middle Column - Tasks (spans 2 cols) */}
-          <div className="col-span-2 card p-4 flex flex-col min-h-0">
+          <div className="md:col-span-2 card p-3 sm:p-4 flex flex-col min-h-0">
             {/* Date Navigation */}
-            <div className="flex items-center justify-between mb-3 flex-shrink-0">
-              <div className="flex items-center gap-2">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 sm:mb-3 flex-shrink-0 gap-2">
+              <div className="flex items-center gap-1 sm:gap-2 w-full sm:w-auto">
                 <button onClick={goToPrevDay} className="p-1 hover:bg-ink/10 rounded transition-colors text-ink/60 hover:text-ink">
                   ←
                 </button>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 sm:gap-2 flex-1 sm:flex-none">
                   <input
                     type="date"
                     value={selectedDate}
                     max={today}
                     onChange={(e) => setSelectedDate(e.target.value)}
-                    className="input-field py-1 px-2 text-sm w-36"
+                    className="input-field py-1 px-2 text-xs sm:text-sm flex-1 sm:w-36"
                   />
                   {!isToday && (
-                    <button onClick={goToToday} className="text-xs text-ink/50 hover:text-ink underline">
+                    <button onClick={goToToday} className="text-[10px] sm:text-xs text-ink/50 hover:text-ink underline whitespace-nowrap">
                       Today
                     </button>
                   )}
@@ -422,28 +422,28 @@ export default function SprintDashboard() {
               </div>
               <div className="flex items-center gap-2">
                 {isPastDate && (
-                  <span className="text-xs bg-ink/10 text-ink/60 px-2 py-1 rounded-full">View Only</span>
+                  <span className="text-[10px] sm:text-xs bg-ink/10 text-ink/60 px-2 py-1 rounded-full">View Only</span>
                 )}
                 {isToday && (
-                  <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Today</span>
+                  <span className="text-[10px] sm:text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Today</span>
                 )}
-                <p className="text-xs text-ink/50">{selectedTasks.filter(t => t.status === 'finished').length}/{selectedTasks.length}</p>
+                <p className="text-[10px] sm:text-xs text-ink/50">{selectedTasks.filter(t => t.status === 'finished').length}/{selectedTasks.length}</p>
               </div>
             </div>
 
-            <h2 className="font-bold text-sm mb-1 flex-shrink-0">{formatDateLong(selectedDate)}</h2>
+            <h2 className="font-bold text-xs sm:text-sm mb-1 flex-shrink-0">{formatDateLong(selectedDate)}</h2>
 
             {/* Add Task - only for today */}
             {isToday && (
-              <div className="flex gap-2 mb-3 flex-shrink-0">
+              <div className="flex gap-2 mb-2 sm:mb-3 flex-shrink-0">
                 <input
                   type="text" value={newTaskInput}
                   onChange={(e) => setNewTaskInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addTask()}
-                  className="input-field flex-1 py-2 text-sm"
+                  className="input-field flex-1 py-1.5 sm:py-2 text-xs sm:text-sm"
                   placeholder="What needs to be done today?"
                 />
-                <button onClick={addTask} className="btn-primary text-sm px-4">+ Add</button>
+                <button onClick={addTask} className="btn-primary text-xs sm:text-sm px-3 sm:px-4 whitespace-nowrap">+ Add</button>
               </div>
             )}
 
@@ -454,15 +454,15 @@ export default function SprintDashboard() {
                 </p>
               ) : (
                 selectedTasks.map((task) => (
-                  <div key={task.id} className={`card-inner p-3 flex items-center gap-3 ${!isToday ? 'opacity-80' : ''}`}>
-                    <p className={`flex-1 text-sm ${task.status === 'finished' ? 'line-through text-ink/40' : ''}`}>{task.task}</p>
-                    <div className="flex gap-1">
+                  <div key={task.id} className={`card-inner p-2 sm:p-3 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-3 ${!isToday ? 'opacity-80' : ''}`}>
+                    <p className={`flex-1 text-xs sm:text-sm ${task.status === 'finished' ? 'line-through text-ink/40' : ''}`}>{task.task}</p>
+                    <div className="flex gap-1 w-full sm:w-auto">
                       {(['not_started', 'in_progress', 'finished'] as TaskStatus[]).map((status) => (
                         <button
                           key={status}
                           onClick={() => updateTaskStatus(task.id, status)}
                           disabled={!isToday}
-                          className={`px-2 py-1 text-[10px] rounded-full border transition-all ${
+                          className={`px-1.5 sm:px-2 py-0.5 sm:py-1 text-[9px] sm:text-[10px] rounded-full border transition-all flex-1 sm:flex-none ${
                             task.status === status ? 'bg-ink text-sage-50 border-ink' : 'border-ink/20'
                           } ${!isToday ? 'cursor-default' : 'hover:border-ink/50'}`}
                         >
@@ -470,7 +470,7 @@ export default function SprintDashboard() {
                         </button>
                       ))}
                       {isToday && (
-                        <button onClick={() => removeTask(task.id)} className="px-1 text-ink/30 hover:text-red-500 text-xs">✕</button>
+                        <button onClick={() => removeTask(task.id)} className="px-1 text-ink/30 hover:text-red-500 text-xs sm:text-sm">✕</button>
                       )}
                     </div>
                   </div>
@@ -480,7 +480,7 @@ export default function SprintDashboard() {
           </div>
 
           {/* Right Column - Wins */}
-          <div className="card p-4 flex flex-col min-h-0">
+          <div className="card p-3 sm:p-4 flex flex-col min-h-0 md:col-span-1">
             <div className="flex items-center justify-between mb-3 flex-shrink-0">
               <h2 className="font-bold">Wins</h2>
               {!isToday && selectedWins.length > 0 && (
@@ -507,35 +507,35 @@ export default function SprintDashboard() {
                   type="text" value={newWinInput}
                   onChange={(e) => setNewWinInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && addWin()}
-                  className="input-field flex-1 py-2 text-sm"
+                  className="input-field flex-1 py-1.5 sm:py-2 text-xs sm:text-sm"
                   placeholder="Add a win..."
                 />
-                <button onClick={addWin} className="btn-primary text-sm px-3">Add</button>
+                <button onClick={addWin} className="btn-primary text-xs sm:text-sm px-2 sm:px-3 whitespace-nowrap">Add</button>
               </div>
             )}
           </div>
         </div>
 
         {/* Bottom Row - Milestones */}
-        <div className="grid grid-cols-2 gap-4 flex-shrink-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 flex-shrink-0">
           {/* Weekly Milestones */}
-          <div className="card p-4">
-            <div className="flex items-center justify-between mb-3">
+          <div className="card p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
               <div>
-                <h2 className="font-bold text-sm">Weekly Milestones</h2>
-                <p className="text-xs text-ink/40">{currentWeek}</p>
+                <h2 className="font-bold text-xs sm:text-sm">Weekly Milestones</h2>
+                <p className="text-[10px] sm:text-xs text-ink/40">{currentWeek}</p>
               </div>
-              <p className="text-xs text-ink/50">{thisWeekMilestones.filter(m => m.done).length}/{thisWeekMilestones.length}</p>
+              <p className="text-[10px] sm:text-xs text-ink/50">{thisWeekMilestones.filter(m => m.done).length}/{thisWeekMilestones.length}</p>
             </div>
             <div className="flex gap-2 mb-2">
               <input
                 type="text" value={newWeeklyMilestone}
                 onChange={(e) => setNewWeeklyMilestone(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addWeeklyMilestone()}
-                className="input-field flex-1 py-1.5 text-sm"
+                className="input-field flex-1 py-1 sm:py-1.5 text-xs sm:text-sm"
                 placeholder="Add milestone..."
               />
-              <button onClick={addWeeklyMilestone} className="btn-primary text-xs px-3">Add</button>
+              <button onClick={addWeeklyMilestone} className="btn-primary text-[10px] sm:text-xs px-2 sm:px-3 whitespace-nowrap">Add</button>
             </div>
             <div className="space-y-1 max-h-24 overflow-y-auto">
               {thisWeekMilestones.map((m) => (
@@ -553,20 +553,20 @@ export default function SprintDashboard() {
           </div>
 
           {/* Sprint Milestones */}
-          <div className="card p-4">
-            <div className="flex items-center justify-between mb-3">
-              <h2 className="font-bold text-sm">Sprint Milestones</h2>
-              <p className="text-xs text-ink/50">{data.sprintMilestones.filter(m => m.done).length}/{data.sprintMilestones.length}</p>
+          <div className="card p-3 sm:p-4">
+            <div className="flex items-center justify-between mb-2 sm:mb-3">
+              <h2 className="font-bold text-xs sm:text-sm">Sprint Milestones</h2>
+              <p className="text-[10px] sm:text-xs text-ink/50">{data.sprintMilestones.filter(m => m.done).length}/{data.sprintMilestones.length}</p>
             </div>
             <div className="flex gap-2 mb-2">
               <input
                 type="text" value={newSprintMilestone}
                 onChange={(e) => setNewSprintMilestone(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addSprintMilestone()}
-                className="input-field flex-1 py-1.5 text-sm"
+                className="input-field flex-1 py-1 sm:py-1.5 text-xs sm:text-sm"
                 placeholder="Add milestone..."
               />
-              <button onClick={addSprintMilestone} className="btn-primary text-xs px-3">Add</button>
+              <button onClick={addSprintMilestone} className="btn-primary text-[10px] sm:text-xs px-2 sm:px-3 whitespace-nowrap">Add</button>
             </div>
             <div className="space-y-1 max-h-24 overflow-y-auto">
               {data.sprintMilestones.map((m) => (
