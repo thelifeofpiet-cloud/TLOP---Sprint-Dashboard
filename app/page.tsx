@@ -272,8 +272,8 @@ export default function SprintDashboard() {
             </button>
           </div>
           <div className="flex gap-2 w-full sm:w-auto">
-            <button onClick={exportData} className="btn-secondary text-xs py-1.5 px-3 flex-1 sm:flex-none">Export</button>
-            <label className="btn-secondary text-xs py-1.5 px-3 cursor-pointer flex-1 sm:flex-none">
+            <button onClick={exportData} className="btn-secondary text-xs py-1.5 px-3 flex-1 sm:flex-none text-center">Export</button>
+            <label className="btn-secondary text-xs py-1.5 px-3 cursor-pointer flex-1 sm:flex-none text-center">
               Import
               <input type="file" accept=".json" onChange={importData} className="hidden" />
             </label>
@@ -293,28 +293,25 @@ export default function SprintDashboard() {
                     value={data.sprintConfig.name}
                     onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, name: e.target.value } })}
                     className="input-field text-sm sm:text-base w-full box-border"
-                    style={{ width: '100%', maxWidth: '100%' }}
                   />
                 </div>
                 <div className="flex flex-col sm:grid sm:grid-cols-2 gap-4 w-full">
-                  <div className="w-full sm:w-auto">
+                  <div className="w-full min-w-0">
                     <label className="block text-xs text-ink/60 mb-2 font-medium">Start Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.startDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, startDate: e.target.value } })}
                       className="input-field text-sm sm:text-base w-full box-border"
-                      style={{ width: '100%', maxWidth: '100%' }}
                     />
                   </div>
-                  <div className="w-full sm:w-auto">
+                  <div className="w-full min-w-0">
                     <label className="block text-xs text-ink/60 mb-2 font-medium">End Date</label>
                     <input
                       type="date"
                       value={data.sprintConfig.endDate}
                       onChange={(e) => setData({ ...data, sprintConfig: { ...data.sprintConfig, endDate: e.target.value } })}
                       className="input-field text-sm sm:text-base w-full box-border"
-                      style={{ width: '100%', maxWidth: '100%' }}
                     />
                   </div>
                 </div>
